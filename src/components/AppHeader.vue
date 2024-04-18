@@ -75,7 +75,7 @@ header {
             &:focus {
                 box-shadow: none;
             }
-            
+
             .navbar-toggler-icon {
                 filter: invert(
                     100%
@@ -88,7 +88,7 @@ header {
         .nav-link {
             color: $brand-light;
             &.active {
-                color: $brand-light;
+                color: $brand-secondary;
             }
             &:hover {
                 color: $brand-secondary;

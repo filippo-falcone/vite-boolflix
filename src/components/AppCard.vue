@@ -57,7 +57,8 @@ export default {
         <div v-else-if="cardInfo.original_language === flags[6].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[6].lang)" :alt="cardInfo.original_language"></div></div>
         <div v-else-if="cardInfo.original_language === flags[7].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[7].lang)" :alt="cardInfo.original_language"></div></div>
         <div v-else>Lingua: {{ cardInfo.original_language }}</div>
-        <div class="d-flex">Voto Medio:
+        <div class="d-flex">
+            Voto Medio:
             <div class="d-flex align-items-center ms-2">
                 <i v-for="star in starArray" :key="star" :class="star" class="bi fs-6 text-warning"></i>
             </div>

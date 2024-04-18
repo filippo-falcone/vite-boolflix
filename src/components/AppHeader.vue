@@ -70,6 +70,18 @@ header {
             font-weight: 700;
             text-transform: uppercase;
         }
+
+        .navbar-toggler {
+            &:focus {
+                box-shadow: none;
+            }
+            
+            .navbar-toggler-icon {
+                filter: invert(
+                    100%
+                );
+            }
+        }
     }
 
     .navbar-nav {

@@ -15,26 +15,36 @@ export default {
         };
     },
     methods: {
-        getMovieFromApi() {
-            let apiUrl = 'https://api.themoviedb.org/3/search/movie';
-            if (store.filmsFilter !== '') {
-                store.queryParams.query = store.filmsFilter;
+        getCardFromApi() {
+            // Movies
+            let apiMoviesUrl = 'https://api.themoviedb.org/3/search/movie';
+            if (store.searchFilter !== '') {
+                store.queryParams.query = store.searchFilter;
             }
-            axios.get(apiUrl, {
+            axios.get(apiMoviesUrl, {
                 params: store.queryParams
             })
             .then((rensponse) => {
                 store.movies = rensponse.data.results;
             });
-            console.log(apiUrl, store.queryParams)
-            console.log(store.movies);
+            // TV Series
+            let apiSeriesTvUrl = 'https://api.themoviedb.org/3/search/tv';
+            if (store.searchFilter !== '') {
+                store.queryParams.query = store.searchFilter;
+            }
+            axios.get(apiSeriesTvUrl, {
+                params: store.queryParams
+            })
+            .then((rensponse) => {
+                store.tvSeries = rensponse.data.results;
+            });
         }
     }
 }
 </script>
 
 <template>
-    <AppHeader @search="getMovieFromApi"></AppHeader>
+    <AppHeader @search="getCardFromApi"></AppHeader>
     <AppResults></AppResults>
 </template>
 

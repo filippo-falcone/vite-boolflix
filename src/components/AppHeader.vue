@@ -21,7 +21,7 @@ export default {
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" v-model="store.filmsFilter">
+                        <input class="form-control me-2" type="search" placeholder="Search" v-model="store.searchFilter">
                         <button class="btn btn-success" @click="$emit('search')">Search</button>
                     </div>
                 </div>

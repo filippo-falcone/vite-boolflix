@@ -6,5 +6,6 @@ export const store = reactive({
         language: 'it-IT',
     },
     movies: [],
-    filmsFilter: ''
+    tvSeries: [],
+    searchFilter: '',
 });

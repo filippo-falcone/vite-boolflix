@@ -24,20 +24,21 @@ export default {
     methods: {
         getImageUrl(name) {
             return new URL(`../assets/img/${name}-flag.png`, import.meta.url).href
-        },
-        getStars(){
-            this.cardInfo.vote_average = Math.round(this.cardInfo.vote_average / 2);
-            for(let i = 0; i < 5; i++) {
-                if(i < this.cardInfo.vote_average) {
-                    this.starArray.push('bi-star-fill');
-                } else {
-                    this.starArray.push('bi-star');
-                }
-            }
         }
+        /* Prima soluzione */
+        // getStars(){
+        //     this.cardInfo.vote_average = Math.round(this.cardInfo.vote_average / 2);
+        //     for(let i = 0; i < 5; i++) {
+        //         if(i < this.cardInfo.vote_average) {
+        //             this.starArray.push('bi-star-fill');
+        //         } else {
+        //             this.starArray.push('bi-star');
+        //         }
+        //     }
+        // }
     },
     mounted() {
-        this.getStars()
+        // this.getStars()
     }
 }
 </script>
@@ -59,8 +60,13 @@ export default {
         <div v-else>Lingua: {{ cardInfo.original_language }}</div>
         <div class="d-flex">
             Voto Medio:
-            <div class="d-flex align-items-center ms-2">
+            <!-- Prima soluzione -->
+            <!-- <div class="d-flex align-items-center ms-2">
                 <i v-for="star in starArray" :key="star" :class="star" class="bi fs-6 text-warning"></i>
+            </div> -->
+            <!-- Seconda soluzione -->
+            <div class="d-flex align-items-center ms-2">
+                <i v-for="i in 5" :class="{ 'bi-star-fill': i <= Math.round(cardInfo.vote_average / 2), 'bi-star': i > Math.round(cardInfo.vote_average / 2) }" class="bi fs-6 text-warning"></i>
             </div>
         </div>
     </li>

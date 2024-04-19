@@ -5,8 +5,7 @@ export default {
     name: 'AppHeader',
     data() {
         return {
-            store,
-            isActive: true
+            store
         };
     },
     methods:{
@@ -50,8 +49,8 @@ export default {
                     </ul>
                     <div>
                         <div class="search-bar-container d-flex">
-                            <i class="bi bi-search d-flex align-items-center text-light fs-5 ms-2" @click="$emit('search')"></i>
-                            <input class="search-bar form-control me-2" type="search" placeholder="Titoli" v-model="store.searchFilter">
+                            <i class="bi bi-search d-flex align-items-center text-light fs-5 ms-2" @click="$emit('search'); $emit('show')"></i>
+                            <input class="search-bar form-control me-2" type="search" placeholder="Titoli" v-model="store.searchFilter" @keyup.enter="$emit('show')">
                         </div>
                     </div>
                 </div>

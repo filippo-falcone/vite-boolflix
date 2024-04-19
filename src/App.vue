@@ -11,7 +11,8 @@ export default {
     },
     data() {
         return {
-            store
+            store,
+            isActive: false
         };
     },
     methods: {
@@ -37,14 +38,21 @@ export default {
             .then((rensponse) => {
                 store.tvSeries = rensponse.data.results;
             });
+        },
+        showSearch() {
+            if (this.isActive && store.searchFilter === '') {
+                this.isActive = false
+            } else if (!this.isActive && store.searchFilter !== '') {
+                this.isActive = true
+            }
         }
     }
 }
 </script>
 
 <template>
-    <AppHeader @search="getMediaFromApi"></AppHeader>
-    <AppResults></AppResults>
+    <AppHeader @search="getMediaFromApi" @show="showSearch"></AppHeader>
+    <AppResults :active="isActive"></AppResults>
 </template>
 
 <style lang="scss">

@@ -15,7 +15,7 @@ export default {
         };
     },
     methods: {
-        getCardFromApi() {
+        getMediaFromApi() {
             // Movies
             let apiMoviesUrl = 'https://api.themoviedb.org/3/search/movie';
             if (store.searchFilter !== '') {
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <template>
-    <AppHeader @search="getCardFromApi"></AppHeader>
+    <AppHeader @search="getMediaFromApi"></AppHeader>
     <AppResults></AppResults>
 </template>
 

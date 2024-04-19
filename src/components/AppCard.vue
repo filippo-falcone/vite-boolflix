@@ -8,22 +8,14 @@ export default {
     },
     data() {
         return {
-            flags: [
-                    {lang: 'it'},
-                    {lang: 'en'},
-                    {lang: 'fr'},
-                    {lang: 'de'},
-                    {lang: 'es'},
-                    {lang: 'ja'},
-                    {lang: 'cn'},
-                    {lang: 'ko'}
-                ],
+            flags: [ 'it', 'en', 'fr', 'de', 'es', 'ja', 'cn', 'ko' ],
             starArray : []
         };
     },
     methods: {
-        getImageUrl(name) {
-            return new URL(`../assets/img/${name}-flag.png`, import.meta.url).href
+        getFlagUrl() {
+            let flagImgName = this.cardInfo.original_language + '-flag.png';
+            return new URL(`../assets/img/${flagImgName}`, import.meta.url).href
         }
         /* Prima soluzione */
         // getStars(){
@@ -49,15 +41,12 @@ export default {
         <div v-else class="img-container"><img :src="'https://image.tmdb.org/t/p/w342' + cardInfo.poster_path" :alt="cardInfo.title || cardInfo.name"></div>
         <h1>Titolo: {{ cardInfo.title || cardInfo.name}}</h1>
         <h3>Titolo originale: {{ cardInfo.original_title || cardInfo.original_name }}</h3>
-        <div v-if="cardInfo.original_language === flags[0].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[0].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[1].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[1].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[2].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[2].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[3].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[3].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[4].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[4].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[5].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[5].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[6].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[6].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else-if="cardInfo.original_language === flags[7].lang" class="d-flex align-items-center">Lingua: <div class="flag-container ms-2"><img :src="getImageUrl(flags[7].lang)" :alt="cardInfo.original_language"></div></div>
-        <div v-else>Lingua: {{ cardInfo.original_language }}</div>
+        <div class="d-flex align-items-center">Lingua: 
+            <div class="flag-container ms-2">
+                <img v-if="flags.includes(cardInfo.original_language)" :src="getFlagUrl()" :alt="cardInfo.original_language">
+                <div v-else>{{ cardInfo.original_language }}</div>
+            </div>
+        </div>
         <div class="d-flex">
             Voto Medio:
             <!-- Prima soluzione -->

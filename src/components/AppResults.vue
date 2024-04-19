@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-        <div class="container">
+        <div class="container py-4">
             <h2>Film</h2>
             <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-6 g-3 mb-3">
                 <AppCard v-for="movie in store.movies" :key="movie.id" :cardInfo="movie"></AppCard>

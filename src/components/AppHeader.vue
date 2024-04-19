@@ -48,10 +48,10 @@ export default {
                             <a class="nav-link" href="#">Sfoglia per lingua</a>
                         </li>
                     </ul>
-                    <div class="d-flex">
+                    <div>
                         <div class="search-bar-container d-flex">
-                            <i class="bi bi-search text-light fs-4 ms-2" @click="$emit('search')"></i>
-                            <input class="search-bar form-control me-2" type="search" placeholder="Titoli, persone, generi" v-model="store.searchFilter">
+                            <i class="bi bi-search d-flex align-items-center text-light fs-5 ms-2" @click="$emit('search')"></i>
+                            <input class="search-bar form-control me-2" type="search" placeholder="Titoli" v-model="store.searchFilter">
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1;
-    
+
     .navbar {
         .navbar-brand {
             color: $brand-secondary;
@@ -92,9 +92,12 @@ header {
     .navbar-nav {
         .nav-link {
             color: $brand-light;
+            font-size: .875rem;
+
             &.active {
                 color: $brand-secondary;
             }
+
             &:hover {
                 color: $brand-secondary;
             }
@@ -109,15 +112,19 @@ header {
         }
 
         .search-bar {
-            color: $brand-light;
-            border: 0;
-            background-color: transparent;
-            &:focus {
+            &.form-control {
+                border: 0;
+                background-color: transparent;
                 color: $brand-light;
-                box-shadow: none;
-            }
-            &::placeholder {
-                color: #c0bebe;
+                &:focus {
+                    color: $brand-light;
+                    box-shadow: none;
+                }
+                
+                &::placeholder {
+                    color: #757575;
+                    font-size: .875rem;
+                }
             }
         }
     }

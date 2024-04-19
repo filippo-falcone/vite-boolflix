@@ -17,10 +17,12 @@ export default {
     methods: {
         getMediaFromApi() {
             // Movies
-            let apiMoviesUrl = 'https://api.themoviedb.org/3/search/movie';
-            if (store.searchFilter !== '') {
+            if (store.searchFilter === '') {
+                store.queryParams.query = store.searchFilter;
+            } else if (store.searchFilter !== '') {
                 store.queryParams.query = store.searchFilter;
             }
+            let apiMoviesUrl = 'https://api.themoviedb.org/3/search/movie';
             axios.get(apiMoviesUrl, {
                 params: store.queryParams
             })
@@ -29,9 +31,6 @@ export default {
             });
             // TV Series
             let apiSeriesTvUrl = 'https://api.themoviedb.org/3/search/tv';
-            if (store.searchFilter !== '') {
-                store.queryParams.query = store.searchFilter;
-            }
             axios.get(apiSeriesTvUrl, {
                 params: store.queryParams
             })

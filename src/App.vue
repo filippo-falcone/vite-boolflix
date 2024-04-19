@@ -3,11 +3,13 @@ import axios from 'axios';
 import { store } from './store';
 import AppHeader from './components/AppHeader.vue';
 import AppResults from './components/AppResults.vue';
+import AppHero from './components/AppHero.vue';
 
 export default {
     components: {
         AppHeader,
-        AppResults
+        AppResults,
+        AppHero
     },
     data() {
         return {
@@ -54,7 +56,8 @@ export default {
 <template>
     <AppHeader @search="getMediaFromApi" @show="showSearch"></AppHeader>
     <main>
-        <AppResults :active="isActive"></AppResults>
+        <AppResults v-if="isActive"></AppResults>
+        <AppHero v-else></AppHero>
     </main>
 </template>
 

@@ -63,7 +63,6 @@ export default {
 @use '../style/partials/variables' as *;
 
 header {
-    background-color: $brand-primary;
     position: sticky;
     top: 0;
     z-index: 1;

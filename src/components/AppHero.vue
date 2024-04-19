@@ -5,19 +5,25 @@ export default {
 </script>
 
 <template>
-    <div class="video-container">
-        <video autoplay muted>
-        <source src="../assets/videos/movies.mp4" type="video/mp4">
-        <!-- <source src="movie.ogg" type="video/ogg"> -->
-</video>
-    </div>
+    <section class="hero">
+        <div class="video-container d-none d-lg-block">
+            <video autoplay muted>
+                <source src="../assets/videos/movies.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
 </template>
 
 <style scoped lang="scss">
-
-.video-container {
-    video {
-        width: 100%;
+.hero {
+    margin-top: -3.8125rem;
+    
+    .video-container {
+        video {
+            width: 100%;
+            height: calc(100vh - .625rem);
+            object-fit: cover;
+        }
     }
 }
 </style>

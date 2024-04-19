@@ -20,8 +20,10 @@ export default {
 <template>
     <header>
         <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand fs-3" href="#">Boolflix</a>
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="../assets/img/logo.png" alt="BoolFlix" height="35">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

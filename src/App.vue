@@ -12,7 +12,8 @@ export default {
     data() {
         return {
             store,
-            isActive: false
+            isActive: false,
+            videos: 888
         };
     },
     methods: {
@@ -52,7 +53,9 @@ export default {
 
 <template>
     <AppHeader @search="getMediaFromApi" @show="showSearch"></AppHeader>
-    <AppResults :active="isActive"></AppResults>
+    <main>
+        <AppResults :active="isActive"></AppResults>
+    </main>
 </template>
 
 <style lang="scss">

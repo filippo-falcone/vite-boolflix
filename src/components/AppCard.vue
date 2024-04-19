@@ -87,7 +87,7 @@ export default {
         background-color: #000000af;
         position: absolute;
         top: 0;
-        right: 4.5%;
+        right: 4.3%;
         bottom: 0;
         left: 3.5%;
         opacity: 0;

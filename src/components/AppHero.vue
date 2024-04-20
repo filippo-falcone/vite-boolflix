@@ -1,14 +1,39 @@
 <script>
 export default {
-    name: 'AppHero'
+    name: 'AppHero',
+    data() {
+            return {
+                videos: [
+                    'guardiani-della-galassia-vol-3',
+                    'avatar-la-leggenda-di-aang',
+
+                ],
+                activeItem: 0,
+                autoChange: null
+            }
+        },
+        methods: {
+            getVideoUrl(name) {
+                return new URL(`../assets/videos/${name}.mp4`, import.meta.url).href
+            },
+            nextSlide() {
+                this.activeItem < this.videos.length - 1 ? this.activeItem++ : this.activeItem = 0;
+                console.log(this.activeItem);
+            },
+            autoplayStart() {
+                this.autoChange = setInterval(this.nextSlide, 144000);
+            }
+        },
+        mounted() {
+            this.autoplayStart();
+        }
 }
 </script>
 
 <template>
     <section class="hero">
         <div class="video-container d-none d-lg-block">
-            <video autoplay muted loop>
-                <source src="../assets/videos/guardiani-della-galassia-vol-3.mp4" type="video/mp4">
+            <video :src="getVideoUrl(videos[activeItem])" autoplay muted>
             </video>
         </div>
         <div class="video-over d-flex flex-column justify-content-end px-5">

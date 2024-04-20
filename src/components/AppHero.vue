@@ -24,7 +24,7 @@ export default {
     position: relative;
 
     .video-container {
-        height: calc(100vh - 9.375rem);
+        height: calc(100vh - 108px);
 
         video {
             width: 100%;

@@ -7,5 +7,7 @@ export const store = reactive({
     },
     movies: [],
     tvSeries: [],
+    trendingMovies: [],
+    trendingTvSeries: [],
     searchFilter: ''
 });

@@ -4,12 +4,14 @@ import { store } from './store';
 import AppHeader from './components/AppHeader.vue';
 import AppHero from './components/AppHero.vue';
 import AppResults from './components/AppResults.vue';
+import AppTrending from './components/AppTrending.vue';
 
 export default {
     components: {
         AppHeader,
         AppHero,
-        AppResults
+        AppResults,
+        AppTrending
     },
     data() {
         return {
@@ -42,6 +44,24 @@ export default {
                 store.tvSeries = rensponse.data.results;
             });
         },
+        getTrendingMediaFromApi() {
+            // Movies
+            let apiTrendingMoviesUrl = 'https://api.themoviedb.org/3/trending/movie/week';
+            axios.get(apiTrendingMoviesUrl, {
+                params: store.queryParams
+            })
+            .then((rensponse) => {
+                store.trendingMovies = rensponse.data.results;
+            });
+            // TV Series
+            let apiTrendingSeriesTvUrl = 'https://api.themoviedb.org/3/trending/tv/week';
+            axios.get(apiTrendingSeriesTvUrl, {
+                params: store.queryParams
+            })
+            .then((rensponse) => {
+                store.trendingTvSeries = rensponse.data.results;
+            });
+        },
         showSearch() {
             if (this.isActive && store.searchFilter === '') {
                 this.isActive = false
@@ -49,6 +69,9 @@ export default {
                 this.isActive = true
             }
         }
+    },
+    mounted() {
+        this.getTrendingMediaFromApi();
     }
 }
 </script>
@@ -57,6 +80,7 @@ export default {
     <AppHeader @search="getMediaFromApi" @show="showSearch"></AppHeader>
     <main>
         <AppHero v-if="!isActive"></AppHero>
+        <AppTrending v-if="!isActive"></AppTrending>
         <AppResults v-else></AppResults>
     </main>
 </template>

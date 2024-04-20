@@ -1,9 +1,10 @@
 <script>
+import axios from 'axios';
 import { store } from '../store';
 import AppCardList from './AppCardList.vue';
 
 export default {
-    name: 'AppResults',
+    name: 'AppTrending',
     components: {
         AppCardList
     },
@@ -18,10 +19,10 @@ export default {
 <template>
     <section>
         <div  class="container py-4">
-            <h2 v-if="store.movies.length > 0">Film</h2>
-            <AppCardList :cardInfo="store.movies"></AppCardList>
-            <h2 v-if="store.tvSeries.length > 0">Serie TV</h2>
-            <AppCardList :cardInfo="store.tvSeries"></AppCardList>
+            <h2 v-if="store.trendingMovies.length > 0">Top 20 della settimana</h2>
+            <AppCardList :cardInfo="store.trendingMovies"></AppCardList>
+            <h2 v-if="store.trendingTvSeries.length > 0">Top 20 della settimana</h2>
+            <AppCardList :cardInfo="store.trendingTvSeries"></AppCardList>
         </div>
     </section>
 </template>

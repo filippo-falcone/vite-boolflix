@@ -16,10 +16,13 @@ export default {
 
 <style scoped lang="scss">
 .hero {
+
     .video-container {
+        height: calc(100vh - 9.375rem);
+
         video {
             width: 100%;
-            height: calc(100vh - 4.4375rem);
+            height: 100%;
             object-fit: cover;
         }
     }

@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-    <section>
+    <section class="trending">
         <div  class="container py-4">
             <h2 v-if="store.trendingMovies.length > 0">Top 20 Film</h2>
             <AppCardList :cardInfo="store.trendingMovies"></AppCardList>
@@ -27,4 +27,8 @@ export default {
     </section>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+// .trending {
+//     margin-top: -61px;
+// }
+</style>

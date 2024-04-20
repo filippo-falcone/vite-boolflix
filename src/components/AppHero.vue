@@ -47,8 +47,11 @@ export default {
             console.log(this.activeItem);
         },
         autoplayStart() {
-            this.autoChange = setInterval(this.nextSlide, 90000);
+            this.autoChange = setInterval(this.nextSlide, 79000);
         }
+    },
+    mounted() {
+        this.autoplayStart();
     }
 }
 </script>

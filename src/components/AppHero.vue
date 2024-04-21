@@ -65,8 +65,8 @@ export default {
 </script>
 
 <template>
-    <section class="hero">
-        <div class="video-container d-none d-lg-block">
+    <section class="hero d-none d-lg-block">
+        <div class="video-container">
             <iframe :src="`https://www.youtube.com/embed/${videos[activeItem].video}?autoplay=1&mute=1&disablekb&controls=0&rel=0`"></iframe>
         </div>
         <div class="video-over d-flex flex-column justify-content-end px-5">

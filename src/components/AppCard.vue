@@ -31,6 +31,11 @@ export default {
     },
     mounted() {
         // this.getStars()
+    },
+    computed: {
+        getVoteIn5() {
+           return Math.round(this.cardInfo.vote_average / 2)
+        }
     }
 }
 </script>
@@ -70,7 +75,7 @@ export default {
                     </div> -->
                     <!-- Seconda soluzione -->
                     <div class="d-flex align-items-center ms-2">
-                        <i v-for="i in 5" :class="{ 'bi-star-fill': i <= Math.round(cardInfo.vote_average / 2), 'bi-star': i > Math.round(cardInfo.vote_average / 2) }" class="bi fs-6 text-warning"></i>
+                        <i v-for="n in 5" :class="{ 'bi-star-fill': n <= getVoteIn5, 'bi-star': n > Math.round(cardInfo.vote_average / 2) }" class="bi fs-6 text-warning"></i>
                     </div>
                 </div>
             </div>

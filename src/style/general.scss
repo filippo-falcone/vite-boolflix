@@ -1,6 +1,9 @@
+@use './partials/variables' as *;
 @import "node_modules/bootstrap/scss/bootstrap";
 
 body {
+    background-color: $brand-primary;
+    color: $brand-light;
     font-family: "Martel Sans", sans-serif;
 }
 

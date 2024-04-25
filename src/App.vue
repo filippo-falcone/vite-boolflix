@@ -17,7 +17,7 @@ export default {
         return {
             store,
             isActive: false,
-            videos: 888
+            isShow: '',
         };
     },
     methods: {
@@ -68,10 +68,24 @@ export default {
             } else if (!this.isActive && store.searchFilter !== '') {
                 this.isActive = true
             }
+        },
+        showButtonToScroll() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              this.isShow = 'active';
+            } else {
+              this.isShow = '';
+            }
+        },
+        scrollTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
         }
     },
     mounted() {
         this.getTrendingMediaFromApi();
+        window.onscroll = () => {
+            this.showButtonToScroll();
+        }
     }
 }
 </script>
@@ -83,14 +97,33 @@ export default {
         <AppTrending v-if="!isActive"></AppTrending>
         <AppResults v-else></AppResults>
     </main>
+    <button class="scroll-up btn" :class="isShow" @click="scrollTop">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
 </template>
 
 <style lang="scss">
 @use './style/general.scss';
 @use './style/partials/variables' as *;
 
-body {
-    background-color: $brand-primary;
-    color: $brand-light;
+.scroll-up {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 2.5rem;
+    z-index: 1;
+    
+    &:hover {
+        border-color: $brand-secondary;
+        
+        i {
+            color: $brand-secondary;
+        }
+    }
+    
+    &.active {
+        background-color: $brand-primary;
+        display: block;
+    }
 }
 </style>

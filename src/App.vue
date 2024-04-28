@@ -109,7 +109,7 @@ export default {
 .scroll-up {
     display: none;
     position: fixed;
-    bottom: 0;
+    bottom: 1rem;
     right: 2.5rem;
     z-index: 1;
     

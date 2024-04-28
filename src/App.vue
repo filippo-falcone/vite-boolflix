@@ -83,7 +83,7 @@ export default {
     },
     mounted() {
         this.getTrendingMediaFromApi();
-        window.onscroll = () => {
+        onscroll = () => {
             this.showButtonToScroll();
         }
     }

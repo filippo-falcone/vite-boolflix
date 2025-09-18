@@ -1,8 +1,12 @@
-# example netlify.toml
+# Configurazione Netlify per Vite + Vue
 [build]
-  command = "npm run build"
+  command = "npm ci && npm run build"
   functions = "netlify/functions"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--legacy-peer-deps"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.

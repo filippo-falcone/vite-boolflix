@@ -12,6 +12,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'        // Homepage con trending e ricerca globale
 import Movies from '../views/Movies.vue'    // Pagina dedicata ai film
 import TvSeries from '../views/TvSeries.vue' // Pagina dedicata alle serie TV
+import NewReleases from '../views/NewReleases.vue' // Pagina nuove uscite
 
 /**
  * Definizione delle rotte dell'applicazione
@@ -36,6 +37,11 @@ const routes = [
     path: '/tv-series',  // Pagina Serie TV - /tv-series
     name: 'TvSeries',
     component: TvSeries  // Mostra solo serie TV (popolari o ricerca)
+  },
+  {
+    path: '/new-releases', // Pagina Nuove Uscite - /new-releases
+    name: 'NewReleases',
+    component: NewReleases // Mostra film al cinema e serie TV in onda
   }
 ]
 

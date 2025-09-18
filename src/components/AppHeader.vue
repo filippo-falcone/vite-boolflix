@@ -95,9 +95,10 @@ export default {
                         <li class="nav-item">
                             <router-link class="nav-link" to="/movies" active-class="active">Film</router-link>
                         </li>
-                        <!-- Link placeholder per funzionalità future -->
+                        <!-- Link pagina Nuove Uscite -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Nuovi e popolari</a>
+                            <router-link class="nav-link" to="/new-releases" active-class="active">Nuove
+                                uscite</router-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">La mia lista</a>

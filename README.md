@@ -17,16 +17,20 @@ Una moderna applicazione web per la ricerca di film e serie TV, costruita con Vu
 - **Styling**: Bootstrap 5 + SASS
 - **Icons**: Bootstrap Icons
 - **HTTP Client**: Axios
-- **Deployment**: Netlify
+- **Containerization**: Docker & Docker Compose
+- **Web Server (Prod)**: Nginx Alpine
+- **Deployment**: Netlify / Docker
 
 ## 🚀 Installazione e avvio
 
-### Prerequisiti
+### Opzione 1: Installazione tradizionale
+
+#### Prerequisiti
 
 - Node.js (versione 16 o superiore)
 - npm o yarn
 
-### Installazione
+#### Installazione
 
 ```bash
 # Clona il repository
@@ -39,7 +43,7 @@ cd vite-boolflix
 npm install
 ```
 
-### Sviluppo
+#### Sviluppo
 
 ```bash
 # Avvia il server di sviluppo
@@ -48,7 +52,7 @@ npm run dev
 
 L'applicazione sarà disponibile su `http://localhost:5173`
 
-### Build per produzione
+#### Build per produzione
 
 ```bash
 # Crea la build di produzione
@@ -56,6 +60,55 @@ npm run build
 
 # Anteprima della build
 npm run preview
+```
+
+### Opzione 2: Docker (Consigliata) 🐳
+
+Con Docker non hai bisogno di installare Node.js localmente!
+
+#### Prerequisiti
+
+- Docker
+- Docker Compose
+
+#### Sviluppo con Docker
+
+```bash
+# Clona il repository
+git clone https://github.com/filippo-falcone/vite-boolflix.git
+
+# Naviga nella cartella del progetto
+cd vite-boolflix
+
+# Avvia in modalità development (con hot reload)
+docker-compose --profile dev up --build
+```
+
+L'applicazione sarà disponibile su `http://localhost:5173`
+
+#### Produzione con Docker
+
+```bash
+# Avvia in modalità production
+docker-compose --profile prod up --build
+```
+
+L'applicazione sarà disponibile su `http://localhost:8080`
+
+#### Comandi Docker utili
+
+```bash
+# Ferma i container
+docker-compose down
+
+# Ricostruisci le immagini
+docker-compose build --no-cache
+
+# Visualizza i log
+docker-compose logs -f
+
+# Accedi al container per debugging
+docker-compose exec vite-boolflix-dev sh
 ```
 
 ## 📁 Struttura del progetto
@@ -88,6 +141,31 @@ L'applicazione utilizza l'API di The Movie Database (TMDB). La chiave API è con
 3. Sostituisci la chiave nel file `src/store.js`
 
 > ⚠️ **Importante**: Rispetta sempre i [Terms of Service di TMDB](https://www.themoviedb.org/terms-of-use) quando utilizzi la loro API.
+
+## 🐳 Architettura Docker
+
+Il progetto utilizza un approccio multi-stage per ottimizzare sia lo sviluppo che la produzione:
+
+### Development Stage
+
+- **Base**: Node.js 18 Alpine
+- **Port**: 5173 (Vite dev server)
+- **Features**: Hot reload, bind mount dei sorgenti
+- **Comando**: `npm run dev -- --host 0.0.0.0`
+
+### Production Stage
+
+- **Build**: Node.js 18 Alpine + build Vite
+- **Runtime**: Nginx Alpine (molto leggero)
+- **Port**: 80 (servito da Nginx)
+- **Features**: Gzip compression, cache headers, SPA routing
+
+### File Docker inclusi
+
+- `Dockerfile`: Multi-stage build
+- `docker-compose.yml`: Orchestrazione con profili dev/prod
+- `nginx.conf`: Configurazione ottimizzata per SPA
+- `.dockerignore`: Esclude file non necessari
 
 ## 🌐 Deploy
 

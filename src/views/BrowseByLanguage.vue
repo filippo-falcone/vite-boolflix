@@ -22,7 +22,7 @@
                                             class="flag-image rounded">
                                     </div>
                                     <h6 class="language-name mb-1">{{ language.name }}</h6>
-                                    <small class="language-code text-muted">{{ language.code.toUpperCase() }}</small>
+                                    <small class="language-code">{{ language.code.toUpperCase() }}</small>
                                 </div>
                             </div>
                         </div>
@@ -190,6 +190,9 @@ export default {
  * Mantiene coerenza con il design esistente
  */
 
+// Import delle variabili del tema
+@use '../style/partials/variables' as *;
+
 .language-selector {
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -204,13 +207,15 @@ export default {
 
 .language-card:hover {
     background-color: rgba(0, 0, 0, 0.4);
+    border-color: rgba(224, 10, 18, 0.5); // Leggero accento rosso al hover
     transform: translateY(-2px);
 }
 
 .language-card.active {
-    background-color: rgba(13, 110, 253, 0.2);
-    border-color: #0d6efd;
+    background-color: rgba(224, 10, 18, 0.2);
+    border-color: $brand-secondary; // Usa la variabile del tema Netflix
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(224, 10, 18, 0.3); // Ombra rossa per evidenziare la selezione
 }
 
 .flag-image {
@@ -220,12 +225,13 @@ export default {
 }
 
 .language-name {
-    color: white;
+    color: $brand-light; // Usa la variabile per il testo bianco
     font-weight: 600;
 }
 
 .language-code {
     font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7); // Testo leggermente più grigio
 }
 
 @media (max-width: 768px) {

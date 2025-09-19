@@ -50,7 +50,35 @@ export default {
             // ma emetti l'evento per aggiornare i risultati
             // (Attualmente non utilizzato poiché usiamo watchers nelle pagine)
             this.$emit('search');
+        },
+
+        /**
+         * Chiude automaticamente il menu mobile quando si naviga
+         * 
+         * Trova l'elemento del menu collassabile e lo chiude
+         * utilizzando Bootstrap Collapse API
+         */
+        closeNavbar() {
+            const navbarCollapse = document.getElementById('navbarSupportedContent');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                // Trova il button toggler e simula un click per chiudere
+                const toggler = document.querySelector('.navbar-toggler');
+                if (toggler) {
+                    toggler.click();
+                }
+            }
         }
+    },
+
+    /**
+     * Lifecycle hook - componente montato
+     * Aggiunge listener per il cambio di route
+     */
+    mounted() {
+        // Ascolta i cambiamenti di route per chiudere il menu mobile
+        this.$router.afterEach(() => {
+            this.closeNavbar();
+        });
     }
 }
 </script>
@@ -73,7 +101,7 @@ export default {
                     Pulsante hamburger per menu mobile
                     Visibile solo su schermi piccoli (responsive)
                 -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -85,28 +113,33 @@ export default {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <!-- Link Homepage -->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/" active-class="active">Home</router-link>
+                            <router-link class="nav-link" to="/" active-class="active"
+                                @click="closeNavbar">Home</router-link>
                         </li>
                         <!-- Link pagina Serie TV -->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/tv-series" active-class="active">Serie TV</router-link>
+                            <router-link class="nav-link" to="/tv-series" active-class="active"
+                                @click="closeNavbar">Serie TV</router-link>
                         </li>
                         <!-- Link pagina Film -->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/movies" active-class="active">Film</router-link>
+                            <router-link class="nav-link" to="/movies" active-class="active"
+                                @click="closeNavbar">Film</router-link>
                         </li>
                         <!-- Link pagina Nuove Uscite -->
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/new-releases" active-class="active">Nuove
+                            <router-link class="nav-link" to="/new-releases" active-class="active"
+                                @click="closeNavbar">Nuove
                                 uscite</router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/my-list" active-class="active">
+                            <router-link class="nav-link" to="/my-list" active-class="active" @click="closeNavbar">
                                 La mia lista
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" to="/browse-by-language" active-class="active">Sfoglia per
+                            <router-link class="nav-link" to="/browse-by-language" active-class="active"
+                                @click="closeNavbar">Sfoglia per
                                 lingua</router-link>
                         </li>
                     </ul>
@@ -179,16 +212,33 @@ header {
          * Stili per il pulsante hamburger (menu mobile)
          */
         .navbar-toggler {
+            border: 1px solid $brand-light;
+            /* Bordo bianco per visibilità */
+            padding: 4px 8px;
+            /* Padding più compatto */
 
             /* Rimuove il box-shadow di default di Bootstrap al focus */
             &:focus {
                 box-shadow: none;
             }
 
-            /* Icona hamburger - invertita per essere visibile su sfondo scuro */
+            /* Icona hamburger - SVG bianco esplicito senza filter */
             .navbar-toggler-icon {
-                filter: invert(100%);
-                /* Inverte i colori per visibilità */
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+                /* SVG bianco esplicito con !important per override Bootstrap */
+                filter: none !important;
+                /* Rimuove qualsiasi filter che potrebbe interferire */
+            }
+        }
+
+        /**
+         * Classe personalizzata per il toggler - override completo Bootstrap
+         */
+        .custom-toggler {
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+                width: 1.5em !important;
+                height: 1.5em !important;
             }
         }
     }

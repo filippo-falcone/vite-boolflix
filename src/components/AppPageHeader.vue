@@ -57,7 +57,7 @@ export default {
                 </h1>
 
                 <!-- Descrizione opzionale -->
-                <p v-if="description" class="text-center text-muted mb-4">
+                <p v-if="description" class="text-center text-white mb-4">
                     {{ description }}
                 </p>
             </div>

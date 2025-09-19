@@ -12,6 +12,7 @@ Una moderna applicazione web per la ricerca di film e serie TV, costruita con Vu
 - 📱 **Design responsive**: Interfaccia ottimizzata per desktop e mobile
 - ⚡ **Performance elevate**: Costruito con Vite per un caricamento rapido
 - 🧩 **Architettura modulare**: Componenti riutilizzabili, composables Vue 3, API centralizzate
+- 🐳 **Docker ready**: Supporto completo per sviluppo e produzione containerizzati
 
 ## 🛠️ Tecnologie utilizzate
 
@@ -22,7 +23,7 @@ Una moderna applicazione web per la ricerca di film e serie TV, costruita con Vu
 - **HTTP Client**: Axios
 - **Containerization**: Docker & Docker Compose
 - **Web Server (Prod)**: Nginx Alpine
-- **Deployment**: Netlify / Docker
+- **Deployment**: Docker
 
 ## 🚀 Installazione e avvio
 
@@ -165,14 +166,14 @@ Il progetto utilizza un approccio multi-stage per ottimizzare sia lo sviluppo ch
 
 ### Development Stage
 
-- **Base**: Node.js 18 Alpine
+- **Base**: Node.js 20 Alpine
 - **Port**: 5173 (Vite dev server)
 - **Features**: Hot reload, bind mount dei sorgenti
 - **Comando**: `npm run dev -- --host 0.0.0.0`
 
 ### Production Stage
 
-- **Build**: Node.js 18 Alpine + build Vite
+- **Build**: Node.js 20 Alpine + build Vite
 - **Runtime**: Nginx Alpine (molto leggero)
 - **Port**: 80 (servito da Nginx)
 - **Features**: Gzip compression, cache headers, SPA routing
@@ -186,13 +187,26 @@ Il progetto utilizza un approccio multi-stage per ottimizzare sia lo sviluppo ch
 
 ## 🌐 Deploy
 
-L'applicazione è configurata per il deploy automatico su Netlify tramite il file `netlify.toml`.
+### Deploy con Docker
 
-### Deploy manuale
+Per il deploy in produzione, usa il profilo Docker production:
 
 ```bash
+# Build e avvio produzione
+docker-compose --profile prod up --build
+
+# Il sito sarà disponibile su http://localhost:8080
+```
+
+### Deploy su hosting provider
+
+Per deploy su servizi come Netlify, Vercel, o altri:
+
+```bash
+# Crea la build di produzione
 npm run build
-# Carica il contenuto della cartella 'dist' su Netlify
+
+# Carica il contenuto della cartella 'dist' sul tuo hosting provider
 ```
 
 ## 📝 Funzionalità principali

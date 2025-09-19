@@ -16,13 +16,16 @@ import axios from 'axios';
 import { store } from '../store';
 // Import del componente per visualizzare i risultati
 import AppResults from '../components/AppResults.vue';
+// Import del componente header riutilizzabile
+import AppPageHeader from '../components/AppPageHeader.vue';
 
 export default {
     name: 'NewReleases', // Nome del componente
 
     // Registrazione dei componenti utilizzati in questa view
     components: {
-        AppResults // Componente che mostra la griglia di film e serie TV
+        AppResults, // Componente che mostra la griglia di film e serie TV
+        AppPageHeader // Componente header riutilizzabile
     },
 
     // Dati reattivi del componente
@@ -115,19 +118,9 @@ export default {
 <template>
     <!-- Contenitore principale della pagina Nuove Uscite -->
     <main>
-        <!-- Header della pagina con titolo principale -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Titolo principale della pagina -->
-                    <h1 class="text-center my-4">🎬 Nuove Uscite</h1>
-                    <!-- Sottotitolo descrittivo -->
-                    <p class="text-center text-white mb-4">
-                        Scopri i film al cinema e le serie TV attualmente in onda
-                    </p>
-                </div>
-            </div>
-        </div>
+        <!-- Header della pagina standardizzato -->
+        <AppPageHeader title="Nuove Uscite" icon="🎬"
+            description="Scopri i film al cinema e le serie TV attualmente in onda" />
 
         <!-- 
             Componente risultati che mostra:
@@ -145,25 +138,17 @@ export default {
 /**
  * Stili specifici per la pagina Nuove Uscite
  * 
- * Mantiene coerenza con il design generale dell'applicazione
- * utilizzando principalmente le classi Bootstrap
+ * Utilizza principalmente Bootstrap ma aggiunge alcuni accenti
+ * per rendere la pagina coerente con il design globale
  */
 
-/* Stili per il sottotitolo descrittivo */
-.text-muted {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-}
+main {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
 
-/* Override responsivi se necessario */
-@media (max-width: 768px) {
     h1 {
-        font-size: 2rem;
-        /* Dimensione ridotta su mobile */
-    }
-
-    .text-muted {
-        font-size: 1rem;
+        font-weight: 300;
+        font-size: 2.5rem;
     }
 }
 </style>

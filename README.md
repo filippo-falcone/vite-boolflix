@@ -7,8 +7,11 @@ Una moderna applicazione web per la ricerca di film e serie TV, costruita con Vu
 - 🔍 **Ricerca avanzata**: Cerca film e serie TV per titolo
 - 🎭 **Contenuti trending**: Visualizza i film e le serie TV più popolari del momento
 - 🏴 **Supporto multilingua**: Bandiere dei paesi per identificare la lingua originale
+- ❤️ **Lista dei desideri**: Salva i tuoi film e serie TV preferiti con persistenza localStorage
+- 🌍 **Sfoglia per lingua**: Esplora contenuti dalla tua lingua preferita
 - 📱 **Design responsive**: Interfaccia ottimizzata per desktop e mobile
 - ⚡ **Performance elevate**: Costruito con Vite per un caricamento rapido
+- 🧩 **Architettura modulare**: Componenti riutilizzabili, composables Vue 3, API centralizzate
 
 ## 🛠️ Tecnologie utilizzate
 
@@ -120,8 +123,22 @@ src/
 │   ├── AppCardList.vue  # Lista di card
 │   ├── AppHeader.vue    # Header con ricerca
 │   ├── AppHero.vue      # Sezione hero
+│   ├── AppPageHeader.vue # Header standardizzato pagine
 │   ├── AppResults.vue   # Risultati di ricerca
 │   └── AppTrending.vue  # Contenuti trending
+├── composables/         # Composables Vue 3 (business logic)
+│   ├── useMovies.js     # Logica gestione film
+│   └── useTvSeries.js   # Logica gestione serie TV
+├── services/            # Servizi API centralizzati
+│   └── tmdbApi.js       # Servizio TMDB con interceptors
+├── views/               # Pagine dell'applicazione
+│   ├── Home.vue         # Homepage con trending
+│   ├── Movies.vue       # Pagina film
+│   ├── TvSeries.vue     # Pagina serie TV
+│   ├── NewReleases.vue  # Nuove uscite
+│   ├── BrowseByLanguage.vue # Sfoglia per lingua
+│   └── MyList.vue       # Lista personale
+├── router/              # Vue Router configuration
 ├── style/               # Stili SASS
 │   ├── general.scss     # Stili globali
 │   └── partials/        # Partial SASS

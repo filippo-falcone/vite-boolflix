@@ -14,3 +14,17 @@ input {
 img {
     max-width: 100%;
 }
+
+/**
+ * Stile globale per titoli di sezione con barra rossa
+ * 
+ * Utilizzato per creare coerenza visiva in tutte le pagine
+ * con il colore brand rosso per le linee decorative
+ */
+.section-title {
+    font-weight: 300;
+    border-bottom: 2px solid $brand-secondary;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: $brand-light;
+}

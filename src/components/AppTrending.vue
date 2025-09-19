@@ -18,10 +18,10 @@ export default {
 
 <template>
     <section class="trending">
-        <div  class="container py-4">
-            <h2 v-if="store.trendingMovies.length > 0">Top 20 Film</h2>
+        <div class="container py-4">
+            <h2 v-if="store.trendingMovies.length > 0" class="section-title">Top 20 Film</h2>
             <AppCardList :cardInfo="store.trendingMovies"></AppCardList>
-            <h2 v-if="store.trendingTvSeries.length > 0">Top 20 Serie TV</h2>
+            <h2 v-if="store.trendingTvSeries.length > 0" class="section-title">Top 20 Serie TV</h2>
             <AppCardList :cardInfo="store.trendingTvSeries"></AppCardList>
         </div>
     </section>
@@ -30,5 +30,4 @@ export default {
 <style scoped lang="scss">
 // .trending {
 //     margin-top: -61px;
-// }
-</style>
+// }</style>

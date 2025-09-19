@@ -101,7 +101,9 @@ export default {
                                 uscite</router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">La mia lista</a>
+                            <router-link class="nav-link" to="/my-list" active-class="active">
+                                La mia lista
+                            </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link class="nav-link" to="/browse-by-language" active-class="active">Sfoglia per

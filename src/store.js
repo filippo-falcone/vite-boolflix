@@ -79,5 +79,129 @@ export const store = reactive({
      * - Osservato da tutte le pagine tramite watchers
      * - Utilizzato per determinare se mostrare contenuti di default o risultati di ricerca
      */
-    searchFilter: ''
+    searchFilter: '',
+
+    /**
+     * Array della lista personale dell'utente
+     * 
+     * Contiene i film e serie TV aggiunti dall'utente alla sua lista personale.
+     * Viene salvato in localStorage per persistenza tra le sessioni.
+     * Ogni elemento contiene l'oggetto completo da TMDB API.
+     */
+    myList: []
 });
+
+/**
+ * Funzioni per gestire la lista personale dell'utente
+ * 
+ * Queste funzioni permettono di aggiungere, rimuovere e verificare
+ * la presenza di elementi nella lista personale, con persistenza
+ * automatica in localStorage.
+ */
+
+/**
+ * Carica la lista dall'localStorage
+ * 
+ * Viene chiamata all'inizializzazione per ripristinare
+ * la lista dell'utente dalle sessioni precedenti
+ */
+export function loadMyListFromStorage() {
+    try {
+        const savedList = localStorage.getItem('boolflix-my-list');
+        if (savedList) {
+            store.myList = JSON.parse(savedList);
+        }
+    } catch (error) {
+        console.error('Errore nel caricamento della lista da localStorage:', error);
+        store.myList = [];
+    }
+}
+
+/**
+ * Salva la lista corrente in localStorage
+ * 
+ * Viene chiamata automaticamente ogni volta che
+ * la lista viene modificata
+ */
+export function saveMyListToStorage() {
+    try {
+        localStorage.setItem('boolflix-my-list', JSON.stringify(store.myList));
+    } catch (error) {
+        console.error('Errore nel salvataggio della lista in localStorage:', error);
+    }
+}
+
+/**
+ * Aggiunge un elemento alla lista personale
+ * 
+ * @param {Object} item - Film o serie TV da aggiungere (oggetto TMDB)
+ * @returns {boolean} - true se aggiunto, false se già presente
+ */
+export function addToMyList(item) {
+    // Verifica se l'elemento è già presente (confronta per ID)
+    const isAlreadyInList = store.myList.some(listItem => 
+        listItem.id === item.id && 
+        (listItem.title || listItem.name) === (item.title || item.name)
+    );
+    
+    if (!isAlreadyInList) {
+        // Aggiunge timestamp per ordinamento
+        const itemWithTimestamp = {
+            ...item,
+            addedAt: new Date().toISOString()
+        };
+        
+        store.myList.unshift(itemWithTimestamp); // Aggiunge in cima
+        saveMyListToStorage();
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Rimuove un elemento dalla lista personale
+ * 
+ * @param {Object} item - Film o serie TV da rimuovere
+ * @returns {boolean} - true se rimosso, false se non presente
+ */
+export function removeFromMyList(item) {
+    const initialLength = store.myList.length;
+    
+    store.myList = store.myList.filter(listItem => 
+        !(listItem.id === item.id && 
+          (listItem.title || listItem.name) === (item.title || item.name))
+    );
+    
+    if (store.myList.length < initialLength) {
+        saveMyListToStorage();
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Verifica se un elemento è presente nella lista
+ * 
+ * @param {Object} item - Film o serie TV da verificare
+ * @returns {boolean} - true se presente, false altrimenti
+ */
+export function isInMyList(item) {
+    return store.myList.some(listItem => 
+        listItem.id === item.id && 
+        (listItem.title || listItem.name) === (item.title || item.name)
+    );
+}
+
+/**
+ * Ottiene il numero di elementi nella lista
+ * 
+ * @returns {number} - Numero di elementi nella lista
+ */
+export function getMyListCount() {
+    return store.myList.length;
+}
+
+// Carica la lista all'inizializzazione
+loadMyListFromStorage();

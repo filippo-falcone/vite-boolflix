@@ -1,15 +1,9 @@
 <template>
     <!-- Contenitore principale della pagina Sfoglia per Lingua -->
     <main>
-        <!-- Header della pagina con titolo -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Titolo della pagina con emoji per identificazione visiva -->
-                    <h1 class="text-center my-4">🌍 Sfoglia per Lingua</h1>
-                </div>
-            </div>
-        </div>
+        <!-- Header della pagina standardizzato -->
+        <AppPageHeader title="Sfoglia per Lingua" icon="🌍"
+            description="Esplora film e serie TV dalla tua lingua preferita" />
 
         <!-- Selezione delle lingue -->
         <div class="container-fluid mb-4">
@@ -81,12 +75,14 @@
 import axios from 'axios';
 import { store } from '../store';
 import AppResults from '../components/AppResults.vue';
+import AppPageHeader from '../components/AppPageHeader.vue';
 
 export default {
     name: 'BrowseByLanguage',
 
     components: {
-        AppResults // Utilizza il componente esistente per mantenere coerenza
+        AppResults, // Utilizza il componente esistente per mantenere coerenza
+        AppPageHeader // Componente header riutilizzabile
     },
 
     data() {

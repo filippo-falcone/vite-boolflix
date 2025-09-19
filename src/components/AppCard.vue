@@ -11,8 +11,8 @@
  * - Gestione responsive del layout
  */
 
-// Import dello store globale (se necessario per funzionalità future)
-import { store } from '../store';
+// Import dello store globale e delle funzioni per la wishlist
+import { store, isInMyList, addToMyList, removeFromMyList } from '../store';
 
 export default {
     name: 'AppCard', // Nome del componente
@@ -67,6 +67,28 @@ export default {
             // Usa la funzione URL con import.meta.url per risolvere il path dinamicamente
             // Questo è necessario con Vite per gestire correttamente gli asset
             return new URL(`../assets/img/${flagImgName}`, import.meta.url).href;
+        },
+
+        /**
+         * Gestisce l'aggiunta/rimozione dalla wishlist
+         * 
+         * Alterna lo stato del media nella lista dei desideri
+         * utilizzando le funzioni dello store globale
+         */
+        toggleWishlist() {
+            // Controllo di sicurezza per assicurarsi che cardInfo sia valido
+            if (!this.cardInfo || !this.cardInfo.id) {
+                console.warn('AppCard: impossibile gestire wishlist, cardInfo non valido:', this.cardInfo);
+                return;
+            }
+
+            if (this.isInWishlist) {
+                // Rimuovi dalla wishlist
+                removeFromMyList(this.cardInfo);
+            } else {
+                // Aggiungi alla wishlist
+                addToMyList(this.cardInfo);
+            }
         }
 
         /**
@@ -115,6 +137,22 @@ export default {
          */
         getVoteIn5() {
             return Math.round(this.cardInfo.vote_average / 2);
+        },
+
+        /**
+         * Verifica se l'elemento è presente nella wishlist
+         * 
+         * Utilizza la funzione dello store per controllare se questo
+         * media è già stato aggiunto alla lista dei desideri
+         * 
+         * @returns {boolean} True se è nella wishlist, false altrimenti
+         */
+        isInWishlist() {
+            // Controllo di sicurezza per oggetti non validi
+            if (!this.cardInfo || !this.cardInfo.id) {
+                return false;
+            }
+            return isInMyList(this.cardInfo);
         }
     }
 }
@@ -160,6 +198,14 @@ export default {
                 Visibile solo al hover, sovrapposto al poster
             -->
             <div class="info-container p-3">
+
+                <!-- Pulsante cuore per wishlist nell'overlay -->
+                <div class="wishlist-btn-overlay" @click.stop="toggleWishlist">
+                    <i :class="{
+                        'bi-heart-fill text-danger': isInWishlist,
+                        'bi-heart text-white': !isInWishlist
+                    }" class="bi fs-4"></i>
+                </div>
 
                 <!-- Titolo (diverso per film vs serie TV) -->
                 <div class="title">
@@ -316,6 +362,30 @@ export default {
         &:hover {
             opacity: 1;
             /* Completamente visibile al hover */
+        }
+
+        /**
+         * Pulsante cuore per wishlist nell'overlay
+         * 
+         * Posizionato nell'angolo in alto a destra dell'overlay
+         * senza sfondo, solo l'icona cuore
+         */
+        .wishlist-btn-overlay {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+
+            i {
+                transition: color 0.3s ease;
+                filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+            }
         }
 
         /**

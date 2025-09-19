@@ -15,13 +15,16 @@ import axios from 'axios';
 import { store } from '../store';
 // Import del componente per visualizzare i risultati
 import AppResults from '../components/AppResults.vue';
+// Import del componente header riutilizzabile
+import AppPageHeader from '../components/AppPageHeader.vue';
 
 export default {
     name: 'Movies', // Nome del componente
 
     // Registrazione dei componenti utilizzati in questa view
     components: {
-        AppResults // Componente che mostra la griglia di film
+        AppResults, // Componente che mostra la griglia di film
+        AppPageHeader // Componente header riutilizzabile
     },
 
     // Dati reattivi del componente
@@ -108,15 +111,8 @@ export default {
 <template>
     <!-- Contenitore principale della pagina Film -->
     <main>
-        <!-- Header della pagina con titolo -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Titolo della pagina con emoji per identificazione visiva -->
-                    <h1 class="text-center my-4">🎬 Film</h1>
-                </div>
-            </div>
-        </div>
+        <!-- Header della pagina standardizzato -->
+        <AppPageHeader title="Film" icon="🎬" />
 
         <!-- 
             Componente risultati che mostra:
@@ -126,6 +122,6 @@ export default {
             Il componente AppResults legge automaticamente da store.movies
             e ignora store.tvSeries (che viene svuotato in getMoviesFromApi)
         -->
-        <AppResults></AppResults>
+        <AppResults :hideTitle="true"></AppResults>
     </main>
 </template>

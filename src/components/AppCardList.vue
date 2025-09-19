@@ -30,13 +30,36 @@ export default {
     props: {
         cardInfo: {
             type: Array,    // Tipo: array di oggetti
-            required: true  // Obbligatorio per il funzionamento del componente
+            required: true, // Obbligatorio per il funzionamento del componente
+            default: () => [] // Valore di default per evitare errori
         }
     },
 
     // Registrazione dei componenti utilizzati
     components: {
         AppCard // Componente per renderizzare una singola card
+    },
+
+    // Computed properties per garantire dati stabili
+    computed: {
+        /**
+         * Array filtrato e validato degli elementi da visualizzare
+         * 
+         * Filtra solo gli elementi validi con ID definito per evitare
+         * errori durante il rendering e problemi con le key di Vue
+         * 
+         * @returns {Array} Array filtrato di media validi
+         */
+        validCardInfo() {
+            if (!this.cardInfo || !Array.isArray(this.cardInfo)) {
+                return [];
+            }
+            return this.cardInfo.filter(media =>
+                media &&
+                media.id &&
+                (media.title || media.name)
+            );
+        }
     }
 }
 </script>
@@ -61,11 +84,12 @@ export default {
         <!-- 
             Loop v-for per creare una card per ogni elemento
             
-            - v-for: Itera attraverso l'array cardInfo ricevuto via props
-            - :key: Utilizzata l'ID univoco del media per performance ottimali
+            - v-for: Itera attraverso l'array validCardInfo (filtrato)
+            - :key: Utilizzata una key composita per maggiore stabilità
             - :cardInfo: Passa i dati del singolo media alla AppCard
         -->
-        <AppCard v-for="media in cardInfo" :key="media.id" :cardInfo="media">
+        <AppCard v-for="media in validCardInfo" :key="`card-${media.id}-${media.title || media.name}`"
+            :cardInfo="media">
         </AppCard>
     </div>
 </template>

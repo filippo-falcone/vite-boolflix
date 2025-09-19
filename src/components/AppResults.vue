@@ -20,6 +20,14 @@ import AppCardList from './AppCardList.vue';
 export default {
     name: 'AppResults', // Nome del componente
 
+    // Props ricevute dal componente genitore
+    props: {
+        hideTitle: {
+            type: Boolean,
+            default: false
+        }
+    },
+
     // Registrazione dei componenti utilizzati
     components: {
         AppCardList // Componente che crea la griglia di card per i media
@@ -46,7 +54,7 @@ export default {
                 Mostrata solo se ci sono film da visualizzare nello store
             -->
             <div v-if="store.movies.length > 0">
-                <h2>Film</h2>
+                <h2 v-if="!hideTitle" class="section-title">Film</h2>
                 <AppCardList :cardInfo="store.movies"></AppCardList>
             </div>
 
@@ -55,7 +63,7 @@ export default {
                 Mostrata solo se ci sono serie TV da visualizzare nello store
             -->
             <div v-if="store.tvSeries.length > 0">
-                <h2>Serie TV</h2>
+                <h2 v-if="!hideTitle" class="section-title">Serie TV</h2>
                 <AppCardList :cardInfo="store.tvSeries"></AppCardList>
             </div>
         </div>

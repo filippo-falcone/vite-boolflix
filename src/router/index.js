@@ -14,6 +14,7 @@ import Movies from '../views/Movies.vue'    // Pagina dedicata ai film
 import TvSeries from '../views/TvSeries.vue' // Pagina dedicata alle serie TV
 import NewReleases from '../views/NewReleases.vue' // Pagina nuove uscite
 import BrowseByLanguage from '../views/BrowseByLanguage.vue' // Pagina sfoglia per lingua
+import MyList from '../views/MyList.vue'    // Pagina lista dei desideri
 
 /**
  * Definizione delle rotte dell'applicazione
@@ -48,6 +49,11 @@ const routes = [
     path: '/browse-by-language', // Pagina Sfoglia per Lingua - /browse-by-language
     name: 'BrowseByLanguage',
     component: BrowseByLanguage // Mostra film e serie TV filtrati per lingua
+  },
+  {
+    path: '/my-list',    // Pagina Lista dei Desideri - /my-list
+    name: 'MyList',
+    component: MyList    // Mostra film e serie TV salvati nella wishlist
   }
 ]
 

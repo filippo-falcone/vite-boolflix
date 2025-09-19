@@ -45,15 +45,19 @@ export default {
                 Sezione Film 
                 Mostrata solo se ci sono film da visualizzare nello store
             -->
-            <h2 v-if="store.movies.length > 0">Film</h2>
-            <AppCardList :cardInfo="store.movies"></AppCardList>
+            <div v-if="store.movies.length > 0">
+                <h2>Film</h2>
+                <AppCardList :cardInfo="store.movies"></AppCardList>
+            </div>
 
             <!-- 
                 Sezione Serie TV
                 Mostrata solo se ci sono serie TV da visualizzare nello store
             -->
-            <h2 v-if="store.tvSeries.length > 0">Serie TV</h2>
-            <AppCardList :cardInfo="store.tvSeries"></AppCardList>
+            <div v-if="store.tvSeries.length > 0">
+                <h2>Serie TV</h2>
+                <AppCardList :cardInfo="store.tvSeries"></AppCardList>
+            </div>
         </div>
     </section>
 </template>

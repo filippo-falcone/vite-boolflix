@@ -104,7 +104,8 @@ export default {
                             <a class="nav-link" href="#">La mia lista</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sfoglia per lingua</a>
+                            <router-link class="nav-link" to="/browse-by-language" active-class="active">Sfoglia per
+                                lingua</router-link>
                         </li>
                     </ul>
 
